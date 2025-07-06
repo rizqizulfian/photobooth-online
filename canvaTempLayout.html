@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Photobooth Online</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Baloo+2&family=Bree+Serif&family=Caveat&family=Chewy&family=Comic+Neue&family=Comfortaa&family=Dancing+Script&family=Fredoka&family=Gloria+Hallelujah&family=Great+Vibes&family=Handlee&family=Indie+Flower&family=Lobster&family=Pacifico&family=Patrick+Hand&family=Poppins&family=Satisfy&family=Shadows+Into+Light&family=Yellowtail&display=swap"
+    rel="stylesheet">
+
+
+</head>
+
+<body>
+  <div id="flashEffect"></div>
+  <div class="main-container">
+    <!-- === FASE 1 === -->
+    <div class="main-content" id="fase-1">
+      <h2>Fase 1: Ambil 4 Foto</h2>
+      <div style="position:relative; display:flex; justify-content:center;">
+        <video id="video" autoplay muted></video>
+        <div id="countdown">3</div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn">Ambil 4 Foto</button>
+        <button id="nextBtn" style="display:none;">Berikutnya</button>
+      </div>
+
+      <div class="photo-preview" id="photoContainer"></div>
+    </div>
+
+    <!-- === FASE 2 (New Layout) === -->
+    <div class="main-content layout-fase-2" id="fase-2">
+      <!-- Preview Strip di Kiri -->
+      <div class="strip-preview-container">
+        <canvas id="stripPreviewCanvas" width="200"></canvas>
+      </div>
+
+      <!-- Panel Edit di Kanan -->
+      <div class="edit-panel">
+        <h2>Edit Strip Foto</h2>
+
+        <!-- Bagian HTML Warna Preset -->
+        <div class="color-picker">
+          <p><strong>Warna frame</strong></p>
+          <div class="wrapper-custom-color">
+            <label class="color-circle custom-color">
+              🎨
+              <input type="color" id="frameColor" value="#ffffff" />
+            </label>
+            <div style="margin-bottom: 2%"> Custom Colour</div>
+          </div>
+          <div class="color-options" id="presetColors">
+            <!-- Button warna preset akan di-generate JS -->
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Stiker</strong></p>
+          <div class="sticker-grid" id="presetStickerGrid">
+            <img src="peace-frame.png" alt="Love Sticker" />
+            <img src="fun-friends-frame.png" alt="Love Sticker" />
+            <img src="red-happy-frame.png" alt="Love Sticker" />
+            <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Love Sticker" />
+            <img src="https://cdn-icons-png.flaticon.com/512/3468/3468379.png" alt="Rainbow Sticker" />
+            <img src="https://cdn-icons-png.flaticon.com/512/681/681494.png" alt="Cool Glasses Sticker" />
+          </div>
+        </div>
+
+        <div>
+          <p><strong>Upload Stiker Sendiri</strong></p>
+          <input type="file" id="uploadSticker" accept="image/*" />
+        </div>
+
+        <div class="text-wrapper">
+          <p>Teks</p>
+
+          <label for="textInput">Isi Teks</label>
+          <input type="text" id="textInput" placeholder="Tulis teks di sini" />
+
+          <label for="fontSelector">Font Style</label>
+          <select id="fontSelector"></select>
+
+          <label for="uploadFont">Upload Font</label>
+          <input type="file" id="uploadFont" accept=".ttf,.otf,.woff,.woff2" />
+
+          <label for="textColorPicker">Warna Teks</label>
+          <input type="color" id="textColorPicker" value="#000000" />
+
+          <div></div>
+          <button id="addTextBtn">Tambah Teks</button>
+        </div>
+
+        <div class="action-buttons">
+          <a id="downloadBtn" download="photostrip.png" href="#">
+            <button class="download-btn">Unduh</button>
+          </a>
+          <button id="editUlangBtn" class="retake-btn">Ambil Ulang</button>
+          <button id="deleteObjectBtn" class="retake-btn" style="display:none;">Hapus Objek</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="canvas" width="1280" height="960" style="display: none;"></canvas>
+  <audio id="shutterSound" src="shutter.wav" preload="auto"></audio>
+</body>
+<script src="main.js"></script>
+
+</html>

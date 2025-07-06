@@ -1,0 +1,342 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.main-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.main-content {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+video {
+  border-radius: 12px;
+  width: 100%;
+  max-width: 640px;
+  background: black;
+}
+
+#countdown {
+  position: absolute;
+  font-size: 72px;
+  color: white;
+  font-weight: bold;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.controls,
+.next-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.controls button,
+.controls input[type="color"],
+.next-button button {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #ff4fa3;
+  color: white;
+  font-weight: bold;
+}
+
+.photo-preview {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.photo-preview img {
+  width: 120px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+
+.photo-preview button {
+  margin-top: 5px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: none;
+  background: #ff4fa3;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#fase-2 {
+  display: none;
+}
+
+.layout-fase-2 {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.strip-preview-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.strip-preview-container img {
+  width: 200px;
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-panel {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.edit-panel h2 {
+  margin-top: 0;
+  text-align: left;
+}
+
+.edit-panel .color-picker input[type="color"] {
+  width: 60px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+}
+
+.sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 40px);
+  gap: 10px;
+}
+
+.sticker-grid img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #eee;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.action-buttons button,
+.action-buttons a button {
+  padding: 10px 24px;
+  font-weight: bold;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.download-btn {
+  background: #ff4fa3;
+  border: none;
+  color: white;
+}
+
+.retake-btn {
+  background: transparent;
+  border: 2px solid #ff4fa3;
+  color: #ff4fa3;
+}
+
+@keyframes countdownZoomFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+#countdown {
+  animation: countdownZoomFade 1s ease-in-out;
+}
+
+#flashEffect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.photo-item {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.photo-item:hover .photo-overlay {
+  opacity: 1;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.color-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.color-circle.selected {
+  outline: 3px solid #000;
+}
+
+.color-circle input[type='color'] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-color {
+  display: flex;
+  align-items: center;
+  background: #ccc;
+  font-size: 18px;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  flex-direction: column-reverse;
+  margin-bottom: 3%;
+}
+
+.wrapper-custom-color {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+}
+
+#fontSelector option {
+  font-family: inherit;
+}
+
+.text-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+.text-wrapper p {
+  grid-column: span 2;
+  margin: 0;
+  font-weight: bold;
+}
+
+.text-wrapper input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.text-wrapper select,
+.text-wrapper input[type="file"],
+.text-wrapper input[type="color"] {
+  width: 100%;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#addTextBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #ff4fa3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
